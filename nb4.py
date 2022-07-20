@@ -104,51 +104,51 @@ if __name__ == '__main__':
     # Create a variable that counts the number of OA areas iterated
     OA_area_counter = 0
 
-    # Create a variable that counts th number of iterations needed to achieve the goal of a % within +-2% when compared to 2019 values
+    # Create a variable that counts th number of iterations needed to achieve the goal of a % within +-2% when compared to 2021 values
     iteration_counter = 0
 
-    # Inactive rate for males (1) in 2019 per range of age
+    # Inactive rate for males (1) in 2021 per range of age
     # This values come from Regional labour market statistics: HI01 Headline indicators for the WM
     # link: https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/headlinelabourforcesurveyindicatorsforthenortheasthi01
-    inactive_rate_1_2019_list = [38.7, 9.1, 7.2, 19.0, 86.4]
+    inactive_rate_1_2021_list = [42.7, 9.4, 7.7, 21.7, 88.4]
     # Save each value (males) in a variable to be compared
-    inactive_rate_1_16_24_2019 = inactive_rate_1_2019_list[0]
-    inactive_rate_1_25_34_2019 = inactive_rate_1_2019_list[1]
-    inactive_rate_1_35_49_2019 = inactive_rate_1_2019_list[2]
-    inactive_rate_1_50_64_2019 = inactive_rate_1_2019_list[3]
-    inactive_rate_1_65_120_2019 = inactive_rate_1_2019_list[4]
+    inactive_rate_1_16_24_2021 = inactive_rate_1_2021_list[0]
+    inactive_rate_1_25_34_2021 = inactive_rate_1_2021_list[1]
+    inactive_rate_1_35_49_2021 = inactive_rate_1_2021_list[2]
+    inactive_rate_1_50_64_2021 = inactive_rate_1_2021_list[3]
+    inactive_rate_1_65_120_2021 = inactive_rate_1_2021_list[4]
 
-    # Inactive rate for females (2) in 2019 per range of age
+    # Inactive rate for females (2) in 2021 per range of age
     # This values come from Regional labour market statistics: HI01 Headline indicators for the WM
     # link: https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/headlinelabourforcesurveyindicatorsforthenortheasthi01
-    inactive_rate_2_2019_list = [43.3, 22.2, 20.4, 30.0, 92.9]
+    inactive_rate_2_2021_list = [45.4, 16.4, 17.7, 30.3, 92.4]
     # Save each value (females) in a variable to be compared
-    inactive_rate_2_16_24_2019 = inactive_rate_2_2019_list[0]
-    inactive_rate_2_25_34_2019 = inactive_rate_2_2019_list[1]
-    inactive_rate_2_35_49_2019 = inactive_rate_2_2019_list[2]
-    inactive_rate_2_50_64_2019 = inactive_rate_2_2019_list[3]
-    inactive_rate_2_65_120_2019 = inactive_rate_2_2019_list[4]
+    inactive_rate_2_16_24_2021 = inactive_rate_2_2021_list[0]
+    inactive_rate_2_25_34_2021 = inactive_rate_2_2021_list[1]
+    inactive_rate_2_35_49_2021 = inactive_rate_2_2021_list[2]
+    inactive_rate_2_50_64_2021 = inactive_rate_2_2021_list[3]
+    inactive_rate_2_65_120_2021 = inactive_rate_2_2021_list[4]
 
-    # INITIAL values to transform data from 2011 to 2019 based on the relationship (2019/2011)
-    # These values will be updated everytime an iteration is not within +-2% of the value of 2019
+    # INITIAL values to transform data from 2011 to 2021 based on the relationship (2021/2011)
+    # These values will be updated everytime an iteration is not within +-2% of the value of 2021
     # MEN
-    inactive_conversor_1_16_24 = 1.038
-    inactive_conversor_1_25_34 = 0.823
-    inactive_conversor_1_35_49 = 0.709
-    inactive_conversor_1_50_64 = 0.846
-    inactive_conversor_1_65_120 = 0.966
+    inactive_conversor_1_16_24 = 1.161
+    inactive_conversor_1_25_34 = 0.944
+    inactive_conversor_1_35_49 = 0.958
+    inactive_conversor_1_50_64 = 0.870
+    inactive_conversor_1_65_120 = 0.984
     # FEMALE
-    inactive_conversor_2_16_24 = 0.986
-    inactive_conversor_2_25_34 = 0.763
-    inactive_conversor_2_35_49 = 0.974
-    inactive_conversor_2_50_64 = 0.760
+    inactive_conversor_2_16_24 = 0.994
+    inactive_conversor_2_25_34 = 0.638
+    inactive_conversor_2_35_49 = 0.786
+    inactive_conversor_2_50_64 = 0.732
     inactive_conversor_2_65_120 = 0.980
 
     for gender in gender_list:
         for age_range in age_range_list:
 
             # Set the percentage of inactive per sex and range of age to zero at the begining.
-            ## This value will be updated in every iteration until value obtained is within +-1% from the 2019 value.
+            ## This value will be updated in every iteration until value obtained is within +-2% from the 2021 value.
             (globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_inactive_percentage"]) = 0
 
             print('The group that is in process is the following: ')
@@ -156,9 +156,9 @@ if __name__ == '__main__':
 
             # let's start assigning economic activities to the persons in the synthetic population
             ## Based on the OA level, age and sex
-            while (((globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] - 1) > (
+            while (((globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] - 2) > (
             globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_inactive_percentage"])) or (
-                           (globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] + 1) < (
+                           (globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] + 2) < (
                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_inactive_percentage"]))):
                 iteration_counter += 1
                 print("Number of iteration: ", (iteration_counter))
@@ -191,15 +191,15 @@ if __name__ == '__main__':
                     # print(len(df_people_OA_area))
 
                     # Select only those that belong to a specific gender (male of female) and range of age
-                    # The INACTIVE people will be chosen from this dataset. The number of them will depend on the value of variable "globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"]"
+                    # The INACTIVE people will be chosen from this dataset. The number of them will depend on the value of variable "globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"]"
                     globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}"] = df_people_OA_area.loc[
                         (df_people_OA_area['Sex'] == gender) & (df_people_OA_area['Age'] >= age_range[0]) & (
                                     df_people_OA_area['Age'] <= age_range[1])]
 
                     # Calculate the total number of people with the specific gender and range of age living in that OA area:
-                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2019"] = len(
+                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2021"] = len(
                         globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}"])
-                    # print(globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2019"])
+                    # print(globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2021"])
 
                     # Create a variable per type of economic activity based on sex and range of age
                     col_gender_age0_age1_employed = str(gender) + "_" + str(age_range[0]) + "_" + str(
@@ -211,20 +211,20 @@ if __name__ == '__main__':
 
                     # Identify the number of people based on sex and range of age in the selected OA area that are employed
                     # Value from 2011!!
-                    # Value comming table LC6107EW that has to be updated to 2019
+                    # Value comming table LC6107EW that has to be updated to 2021
                     globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] = df_economic_activity_area.iloc[
                         0, df_economic_activity_area.columns.get_loc(col_gender_age0_age1_employed)]
 
                     # Identify the number of people based on sex and range of age in the selected OA area that are unemployed
                     # Value from 2011!!
-                    # Value comming table LC6107EW that has to be updated to 2019
+                    # Value comming table LC6107EW that has to be updated to 2021
                     globals()[f"unemployed_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] = \
                     df_economic_activity_area.iloc[
                         0, df_economic_activity_area.columns.get_loc(col_gender_age0_age1_unemployed)]
 
                     # Identify the number of people based on sex and range of age in the selected OA area that are inactive
                     # Value from 2011!!
-                    # Value comming table LC6107EW that has to be updated to 2019
+                    # Value comming table LC6107EW that has to be updated to 2021
                     globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] = df_economic_activity_area.iloc[
                         0, df_economic_activity_area.columns.get_loc(col_gender_age0_age1_inactive)]
                     # print(globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"])
@@ -237,35 +237,35 @@ if __name__ == '__main__':
                                                                                           globals()[
                                                                                               f"inactive_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"]
 
-                    # Ratio of people 2019 vs 2011:
+                    # Ratio of people 2021 vs 2011:
                     ## If the number of people of the selected gender and range of age is greater than 0 (e.g., there are people in the OA with this specific sex and range of age)
                     if (globals()[f"Total_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"]) > 0:
 
-                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2019_2011"] = (
-                                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2019"] / globals()[
+                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2021_2011"] = (
+                                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2021"] / globals()[
                                 f"Total_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"])
-                        ## If value > 1, it means there are more people in 2019 in the selected OA area of the specific gender and range of age
+                        ## If value > 1, it means there are more people in 2021 in the selected OA area of the specific gender and range of age
 
                     # If there is no people (gender and age range) in the OA area, then the ratio will be equal to 1
                     else:
-                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2019_2011"] = 1
+                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2021_2011"] = 1
 
-                    # New value for 2019 =  (Value from 2011 (table LC6107EW)) * (inactive conversor value (based on age range and sex)) * (ratio of people 2019 vs 2011 (c))
+                    # New value for 2021 =  (Value from 2011 (table LC6107EW)) * (inactive conversor value (based on age range and sex)) * (ratio of people 2021 vs 2011 (c))
                     ## This value is the number of people that will be randomly assigned "inactive" based on their OA area, range of age and sex
-                    globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"] = int(round(
+                    globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"] = int(round(
                         globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] * globals()[
                             f"inactive_conversor_{gender}_{age_range[0]}_{age_range[1]}"] * globals()[
-                            f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2019_2011"], 0))
+                            f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2021_2011"], 0))
 
                     # print('value from census 2011')
                     # print(globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"])
                     # print('inactive conversor')
                     # print(globals()[f"inactive_conversor_{gender}_{age_range[0]}_{age_range[1]}"])
                     # print('people rate')
-                    # print(globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2019_2011"])
+                    # print(globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2021_2011"])
 
-                    # print('Number of inactive people in the OA area per gender 2019')
-                    # print((globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"]))
+                    # print('Number of inactive people in the OA area per gender 2021')
+                    # print((globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"]))
 
                     # SELECT FIRST STUDENTS
                     # dataframe with those persons that are students:
@@ -279,13 +279,13 @@ if __name__ == '__main__':
                     # If there are STUDENTS in the OA area:
                     if (len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_students"])) > 0:
 
-                        if (globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"]) <= len(
+                        if (globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"]) <= len(
                                 globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_students"]):
 
                             # Select randomly the number of people that will be assigned as inactive
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_students"] = globals()[
                                 f"df_{gender}_{age_range[0]}_{age_range[1]}_students"].sample(
-                                globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                                globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"])
                             # print('all of them are students')
                             # print(len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_students"]))
 
@@ -311,11 +311,11 @@ if __name__ == '__main__':
                         # print('no students')
 
                     # Remaining NUMBER of people to be assigned as INACTIVE:
-                    globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"] = globals()[
-                                                                                                       f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"] - len(
+                    globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"] = globals()[
+                                                                                                       f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"] - len(
                         globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_students"])
                     # print('remaining inactive people to be assigned after students:')
-                    # print(globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                    # print(globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"])
 
                     ## Now we are going to force that remaining people to be INACTIVE will be those which
                     ## NSSEC value is null or 9
@@ -356,7 +356,7 @@ if __name__ == '__main__':
                     # print('select remaining inactive after students')
 
                     # Select randomly the number of people to be inactive based on age and sex:
-                    if (globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"]) <= len(
+                    if (globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"]) <= len(
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_inactive_remaining"]):
 
                         if (len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_inactive_remaining"])) > 0:
@@ -364,7 +364,7 @@ if __name__ == '__main__':
                             # Select randomly the number of people that will be assigned as inactive
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive"] = globals()[
                                 f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_inactive_remaining"].sample(
-                                globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                                globals()[f"remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"])
                             # print('number of NSSEC null selected')
                             # print(len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive"]))
 
@@ -391,13 +391,13 @@ if __name__ == '__main__':
                     # If there are still some people to be assigned as INACTIVE, then their NSSEC can be any value
 
                     # Remaining NUMBER of people to be assigned as INACTIVE:
-                    globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"] = globals()[
-                                                                                                              f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"] - len(
+                    globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"] = globals()[
+                                                                                                              f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"] - len(
                         globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_students"]) - len(
                         globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive"])
 
                     # print('Second_remaining_inactive_ inactive people to be assigned after students and NSSEC:')
-                    # print(globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                    # print(globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"])
 
                     ## Concatenate all people of the specific sex, range age, OA area with the selected students and the others wich NSSEC value is null or 9
                     globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_inactive_plus_students_plus_null"] = (
@@ -411,7 +411,7 @@ if __name__ == '__main__':
                         keep=False)
 
                     # Select randomly the number of people to be inactive based on age and sex:
-                    if (globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"]) <= len(
+                    if (globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"]) <= len(
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_inactive_remaining_last"]):
 
                         if (
@@ -420,7 +420,7 @@ if __name__ == '__main__':
                             # Select randomly the number of people that will be assigned as inactive
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_last"] = globals()[
                                 f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_inactive_remaining_last"].sample(
-                                globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                                globals()[f"Second_remaining_inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"])
                             # print('last sampled')
                             # print(len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_last"]))
                             # print('All assigned inactive people were selected')
@@ -447,11 +447,11 @@ if __name__ == '__main__':
                     # print(len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_all_each_area"]))
                     # print(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_all_each_area"])
 
-                    # print('Number of inactive people from the census projected to 2019:')
-                    # print(globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                    # print('Number of inactive people from the census projected to 2021:')
+                    # print(globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"])
 
-                    # print('Difference (spenser - census 2019):')
-                    # print(len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_all_each_area"]) - globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                    # print('Difference (spenser - census 2021):')
+                    # print(len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_all_each_area"]) - globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_2021"])
 
                     # Append the dataframe into the temporal list
                     persons_inactive_list.append(
@@ -479,19 +479,19 @@ if __name__ == '__main__':
                     globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_inactive_all"]) / globals()[
                                                                                                       f"total_{gender}_{age_range[0]}_{age_range[1]}"]) * 100
 
-                # Compare the results against the ones given in table Regional labour market statistics:HI01 Headline indicators for the North East related to year 2019
-                # If differences obtained against data given is within 1%, then it is Ok
-                if (((globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] - 1) <= (
+                # Compare the results against the ones given in table Regional labour market statistics:HI05 Headline indicators for the West Midlands related to year 2021
+                # If differences obtained against data given is within 2%, then it is Ok
+                if (((globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] - 2) <= (
                 globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_inactive_percentage"])) & (
-                        (globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] + 1) >= (
+                        (globals()[f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] + 2) >= (
                 globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_inactive_percentage"]))):
 
-                    print('The value is within the tolerance of 1%')
+                    print('The value is within the tolerance of 2%')
                     print('Value obtained was',
                           (globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_inactive_percentage"]))
                     print('Now the code should continue with the other gender or age range')
 
-                # If the difference is greater than a 1% (+/-) then a new iteration should be done updating the parameter that transform the employment rate from 2011 to 2019
+                # If the difference is greater than a 2% (+/-) then a new iteration should be done updating the parameter that transform the employment rate from 2011 to 2021
                 else:
                     print('The % needs to be adjusted in another iteration')
                     print('Value obtained was',
@@ -499,9 +499,9 @@ if __name__ == '__main__':
 
                     # If the difference is negative, then a POSITIVE increment has to be added
                     if ((globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_inactive_percentage"]) - globals()[
-                        f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] - 1) < 0:
+                        f"inactive_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] - 1) < 0:
 
-                        # Update the value transform data from 2011 to 2019 (increase the value):
+                        # Update the value transform data from 2011 to 2021 (increase the value):
                         (globals()[f"inactive_conversor_{gender}_{age_range[0]}_{age_range[1]}"]) = (
                                     globals()[f"inactive_conversor_{gender}_{age_range[0]}_{age_range[1]}"] + 0.025)
 
@@ -511,7 +511,7 @@ if __name__ == '__main__':
 
                     # If the difference is positive, then a NEGATIVE increment has to be added
                     else:
-                        # Update the value transform data from 2011 to 2019 (reduce the value):
+                        # Update the value transform data from 2011 to 2021 (reduce the value):
                         (globals()[f"inactive_conversor_{gender}_{age_range[0]}_{age_range[1]}"]) = (
                                     globals()[f"inactive_conversor_{gender}_{age_range[0]}_{age_range[1]}"] - 0.025)
 
@@ -730,50 +730,50 @@ if __name__ == '__main__':
     # Create a variable that counts the number of OA areas iterated
     OA_area_counter = 0
 
-    # Create a variable that counts th number of iterations needed to achieve the goal of a % within +-2% when compared to 2019 values
+    # Create a variable that counts th number of iterations needed to achieve the goal of a % within +-2% when compared to 2021 values
     iteration_counter = 0
 
-    # Employment rate for males (1) in 2019 per range of age
-    # This values come from Regional labour market statistics: HI01 Headline indicators for the WM
-    employed_rate_1_2019_list = [53.0, 85.7, 90.4, 78.0, 13.4]
+    # Employment rate for males (1) in 2021 per range of age
+    # This values come from Regional labour market statistics: HI05 Headline indicators for the WM
+    employed_rate_1_2021_list = [47.1, 86.2, 89.6, 75.7, 11.5]
     # Save each value (males) in a variable to be compared
-    employed_rate_1_16_24_2019 = employed_rate_1_2019_list[0]
-    employed_rate_1_25_34_2019 = employed_rate_1_2019_list[1]
-    employed_rate_1_35_49_2019 = employed_rate_1_2019_list[2]
-    employed_rate_1_50_64_2019 = employed_rate_1_2019_list[3]
-    employed_rate_1_65_120_2019 = employed_rate_1_2019_list[4]
+    employed_rate_1_16_24_2021 = employed_rate_1_2021_list[0]
+    employed_rate_1_25_34_2021 = employed_rate_1_2021_list[1]
+    employed_rate_1_35_49_2021 = employed_rate_1_2021_list[2]
+    employed_rate_1_50_64_2021 = employed_rate_1_2021_list[3]
+    employed_rate_1_65_120_2021 = employed_rate_1_2021_list[4]
 
-    # Employment rate for females (2) in 2019 per range of age
+    # Employment rate for females (2) in 2021 per range of age
     # This values come from Regional labour market statistics: HI01 Headline indicators for the WM
-    employed_rate_2_2019_list = [49.7, 74.6, 76.7, 68.3, 7.1]
+    employed_rate_2_2021_list = [48.7, 78.8, 79.3, 67.5, 7.5]
     # Save each value (females) in a variable to be compared
-    employed_rate_2_16_24_2019 = employed_rate_2_2019_list[0]
-    employed_rate_2_25_34_2019 = employed_rate_2_2019_list[1]
-    employed_rate_2_35_49_2019 = employed_rate_2_2019_list[2]
-    employed_rate_2_50_64_2019 = employed_rate_2_2019_list[3]
-    employed_rate_2_65_120_2019 = employed_rate_2_2019_list[4]
+    employed_rate_2_16_24_2021 = employed_rate_2_2021_list[0]
+    employed_rate_2_25_34_2021 = employed_rate_2_2021_list[1]
+    employed_rate_2_35_49_2021 = employed_rate_2_2021_list[2]
+    employed_rate_2_50_64_2021 = employed_rate_2_2021_list[3]
+    employed_rate_2_65_120_2021 = employed_rate_2_2021_list[4]
 
-    # INITIAL values to transform data from 2011 to 2019 based on the relationship (2019/2011)
-    # These values will be updated everytime an iteration is not within +-2% of the value of 2019
+    # INITIAL values to transform data from 2011 to 2021 based on the relationship (2021/2011)
+    # These values will be updated everytime an iteration is not within +-2% of the value of 2021
     # MEN
-    employed_conversor_1_16_24 = 1.129
-    employed_conversor_1_25_34 = 1.079
-    employed_conversor_1_35_49 = 1.084
-    employed_conversor_1_50_64 = 1.087
-    employed_conversor_1_65_120 = 1.336
+    employed_conversor_1_16_24 = 1.066
+    employed_conversor_1_25_34 = 1.055
+    employed_conversor_1_35_49 = 1.045
+    employed_conversor_1_50_64 = 1.072
+    employed_conversor_1_65_120 = 1.168
     # FEMALE
-    employed_conversor_2_16_24 = 1.066
-    employed_conversor_2_25_34 = 1.137
-    employed_conversor_2_35_49 = 1.035
-    employed_conversor_2_50_64 = 1.183
-    employed_conversor_2_65_120 = 1.367
+    employed_conversor_2_16_24 = 1.119
+    employed_conversor_2_25_34 = 1.185
+    employed_conversor_2_35_49 = 1.084
+    employed_conversor_2_50_64 = 1.191
+    employed_conversor_2_65_120 = 1.377
 
     # Initialise the % of employed people to 0% based on sex and range of age
     for gender in gender_list:
         for age_range in age_range_list:
 
             # Set the percentage of employed per sex and range of age to zero at the begining.
-            ## This value will be updated in every iteration until value obtained is within +-2% from the 2019 value.
+            ## This value will be updated in every iteration until value obtained is within +-2% from the 2021 value.
             (globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_employed_percentage"]) = 0
 
             print('The group that is in process is the following: ')
@@ -782,9 +782,9 @@ if __name__ == '__main__':
             # let's start assigning economic activities to the persons in the synthetic population
             ## Based on the OA level, age and sex
 
-            while (((globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] - 1) > (
+            while (((globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] - 2) > (
             globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_employed_percentage"])) or (
-                           (globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] + 1) < (
+                           (globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] + 2) < (
                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_employed_percentage"]))):
                 iteration_counter += 1
                 print("Number of iteration: ", (iteration_counter))
@@ -819,7 +819,7 @@ if __name__ == '__main__':
                                     df_people_OA_area['Age'] <= age_range[1])]
 
                     # Calculate the number of people with the specific gender and range of age living in that OA area:
-                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2019"] = len(
+                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2021"] = len(
                         globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}"])
 
                     # Create a variable per type of economic activity based on sex and range of age
@@ -832,20 +832,20 @@ if __name__ == '__main__':
 
                     # Identify the number of people based on sex and range of age in the selected OA area that are employed
                     # Value from 2011!!
-                    # Value comming table LC6107EW that has to be updated to 2019
+                    # Value comming table LC6107EW that has to be updated to 2021
                     globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] = df_economic_activity_area.iloc[
                         0, df_economic_activity_area.columns.get_loc(col_gender_age0_age1_employed)]
 
                     # Identify the number of people based on sex and range of age in the selected OA area that are unemployed
                     # Value from 2011!!
-                    # Value comming table LC6107EW that has to be updated to 2019
+                    # Value comming table LC6107EW that has to be updated to 2021
                     globals()[f"unemployed_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] = \
                     df_economic_activity_area.iloc[
                         0, df_economic_activity_area.columns.get_loc(col_gender_age0_age1_unemployed)]
 
                     # Identify the number of people based on sex and range of age in the selected OA area that are inactive
                     # Value from 2011!!
-                    # Value comming table LC6107EW that has to be updated to 2019
+                    # Value comming table LC6107EW that has to be updated to 2021
                     globals()[f"inactive_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] = df_economic_activity_area.iloc[
                         0, df_economic_activity_area.columns.get_loc(col_gender_age0_age1_inactive)]
 
@@ -857,25 +857,25 @@ if __name__ == '__main__':
                                                                                           globals()[
                                                                                               f"inactive_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"]
 
-                    # Ratio of people 2019 vs 2011:
+                    # Ratio of people 2021 vs 2011:
                     ## If the number of people of the selected gender and range of age is greater than 0 (e.g., there are people in the OA with this specific sex and range of age)
                     if (globals()[f"Total_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"]) > 0:
 
-                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2019_2011"] = (
-                                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2019"] / globals()[
+                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2021_2011"] = (
+                                    globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_in_OA_2021"] / globals()[
                                 f"Total_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"])
-                        ## If value > 0, it means there are more people in 2019 in the selected OA area of the specific gender and range of age
+                        ## If value > 0, it means there are more people in 2021 in the selected OA area of the specific gender and range of age
 
                     # If there is no people (gender and age range) in the OA area, then the ratio will be equal to 1
                     else:
-                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2019_2011"] = 1
+                        globals()[f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2021_2011"] = 1
 
-                    # New value for 2019 =  (Value from 2011 (table LC6107EW)) * (employed conversor value (based on age range and sex)) * (ratio of people 2019 vs 2011 (c))
+                    # New value for 2021 =  (Value from 2011 (table LC6107EW)) * (employed conversor value (based on age range and sex)) * (ratio of people 2021 vs 2011 (c))
                     ## This value is the number of people that will be randomly assigned "employed" based on their OA area, range of age and sex
-                    globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2019"] = int(round(
+                    globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2021"] = int(round(
                         globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_LC6107EW"] * globals()[
                             f"employed_conversor_{gender}_{age_range[0]}_{age_range[1]}"] * globals()[
-                            f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2019_2011"], 0))
+                            f"ratio_people_{gender}_{age_range[0]}_{age_range[1]}_2021_2011"], 0))
 
                     # Select those people of the selected sex, age range and OA area that can be selected:
                     globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_employed"] = \
@@ -885,7 +885,7 @@ if __name__ == '__main__':
                                                       (df_persons_potential_employed['Area_OA_x'] == OA_area))]
 
                     # Select randomly the number of people to be employed based on age and sex:
-                    if (globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2019"]) <= len(
+                    if (globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2021"]) <= len(
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_employed"]):
 
                         if (len(globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}"])) > 0:
@@ -893,7 +893,7 @@ if __name__ == '__main__':
                             # Select randomly the number of people that will be assigned as employed
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_employed"] = globals()[
                                 f"df_{gender}_{age_range[0]}_{age_range[1]}_potential_employed"].sample(
-                                globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2019"])
+                                globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2021"])
 
                         else:
                             # If the dataframe does not have any remaining rows, then it will be empty.
@@ -907,7 +907,7 @@ if __name__ == '__main__':
                     # if there are still some people in the OA area to be assigned as "EMPLOYED" but there are no more
                     # people in the selected dataframe, then we are going to consider as well those
                     ## people wich NSSEC = 8
-                    if (globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2019"] > len(
+                    if (globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2021"] > len(
                             globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_employed"])):
 
                         # Select people in the OA area (depending on the sex type and age range)
@@ -929,13 +929,13 @@ if __name__ == '__main__':
                         if (len(df_persons_NO_inactive_remaining) > 0):
 
                             if (len(df_persons_NO_inactive_remaining) > globals()[
-                                f"employed_{gender}_{age_range[0]}_{age_range[1]}_2019"] - len(
+                                f"employed_{gender}_{age_range[0]}_{age_range[1]}_2021"] - len(
                                     globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_employed"])):
 
                                 # Select the remaining people as "employed"
                                 globals()[
                                     f"df_{gender}_{age_range[0]}_{age_range[1]}_employed_leftovers"] = df_persons_NO_inactive_remaining.sample(
-                                    globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2019"] - len(
+                                    globals()[f"employed_{gender}_{age_range[0]}_{age_range[1]}_2021"] - len(
                                         globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_employed"]))
 
                             else:
@@ -977,19 +977,19 @@ if __name__ == '__main__':
                     globals()[f"df_{gender}_{age_range[0]}_{age_range[1]}_employed_selected"]) / globals()[
                                                                                                       f"total_{gender}_{age_range[0]}_{age_range[1]}"]) * 100
 
-                # Compare the results against the ones given in table Regional labour market statistics:HI01 Headline indicators for the North East related to year 2019
-                # If differences obtained against data given is within 1%, then it is Ok
-                if (((globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] - 1) <= (
+                # Compare the results against the ones given in table Regional labour market statistics:HI05 Headline indicators for WM related to year 2021
+                # If differences obtained against data given is within 2%, then it is Ok
+                if (((globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] - 2) <= (
                 globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_employed_percentage"])) & (
-                        (globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] + 1) >= (
+                        (globals()[f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] + 2) >= (
                 globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_employed_percentage"]))):
 
-                    print('The value is within the tolerance of 1%')
+                    print('The value is within the tolerance of 2%')
                     print('Value obtained was',
                           (globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_employed_percentage"]))
                     print('Now the code should continue with the other gender or age range')
 
-                # If the difference is greater than a 1% (+/-) then a new iteration should be done updating the parameter that transform the employment rate from 2011 to 2019
+                # If the difference is greater than a 2% (+/-) then a new iteration should be done updating the parameter that transform the employment rate from 2011 to 2021
                 else:
                     print('The % needs to be adjusted in another iteration')
                     print('Value obtained was',
@@ -997,9 +997,9 @@ if __name__ == '__main__':
 
                     # If the difference is negative, then a POSITIVE increment has to be added
                     if ((globals()[f"total_{gender}_{age_range[0]}_{age_range[1]}_employed_percentage"]) - globals()[
-                        f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2019"] - 1) < 0:
+                        f"employed_rate_{gender}_{age_range[0]}_{age_range[1]}_2021"] - 1) < 0:
 
-                        # Update the value transform data from 2011 to 2019 (increase the value):
+                        # Update the value transform data from 2011 to 2021 (increase the value):
                         (globals()[f"employed_conversor_{gender}_{age_range[0]}_{age_range[1]}"]) = (
                                     globals()[f"employed_conversor_{gender}_{age_range[0]}_{age_range[1]}"] + 0.025)
 
@@ -1009,7 +1009,7 @@ if __name__ == '__main__':
 
                     # If the difference is positive, then a NEGATIVE increment has to be added
                     else:
-                        # Update the value transform data from 2011 to 2019 (reduce the value):
+                        # Update the value transform data from 2011 to 2021 (reduce the value):
                         (globals()[f"employed_conversor_{gender}_{age_range[0]}_{age_range[1]}"]) = (
                                     globals()[f"employed_conversor_{gender}_{age_range[0]}_{age_range[1]}"] - 0.025)
 
