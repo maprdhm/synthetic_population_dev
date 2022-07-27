@@ -134,7 +134,7 @@ if __name__ == '__main__':
     # MEN
     inactive_conversor_1_16_24 = 1.161
     inactive_conversor_1_25_34 = 0.944
-    inactive_conversor_1_35_49 = 0.958
+    inactive_conversor_1_35_49 = 0.833
     inactive_conversor_1_50_64 = 0.870
     inactive_conversor_1_65_120 = 0.984
     # FEMALE
