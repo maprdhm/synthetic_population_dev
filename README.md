@@ -1,5 +1,7 @@
 # synthetic_population_dev
 
+Notebooks 1 to 12 are slightly adapted from [DACNC /
+synthetic_population_dev](https://github.com/DACNC/synthetic_population_dev). Notebooks 13 to 15 are additional notebooks.
 
 This repository contains the following jupyter notebooks:
 
@@ -59,12 +61,16 @@ SPENSER_notebook_11:
 SPENSER_notebook_12:
 - Merges previous generated outputs in one single dataframe
 
+SPENSER_notebook_13:
+- Calculates the column: highest degree. This column classifies population in 3 categories: higher education degree, below degree or other, none
+
+SPENSER_notebook_14:
+- Calculates the column: health status. This column classifies population in 3 categories: good health, fair health or bad health
+
+SPENSER_notebook_15:
+- Merges all previous generated outputs in one single dataframe
 
 #### Interconnectons between the notebooks: 
-![alt text](https://user-images.githubusercontent.com/57093439/159575966-64290426-9bb0-4d99-be00-28ea9af94c1b.PNG)
+<img src=workflow.png width=500/>
 
-
-
-
-
-Additionally, there is a word file documenting each of the notebooks (e.g., what it does, dependencies and explanation of the main cells).
+Additionally, there is a word file documenting each of the notebooks (e.g., what it does, dependencies and explanation of the main cells). Adaptations are detailled in the file Synthetic_population_additional_documentation.odt.
